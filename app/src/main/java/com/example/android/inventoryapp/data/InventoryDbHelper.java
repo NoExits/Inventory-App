@@ -34,15 +34,19 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
                 + ProductsEntry.COLUMN_PRODUCT_SUPPLIER_PHONE + " TEXT);";
 
         //Log the SQL statement for debugging purposes
-        Log.v(LOG_TAG, "The following statement created the SQL table: " + SQL_CREATE_PRODUCTS_TABLE);
+        Log.i(LOG_TAG, "The following statement created the SQL table: " + SQL_CREATE_PRODUCTS_TABLE);
 
-        //Execute this SQL statement
         sqLiteDatabase.execSQL(SQL_CREATE_PRODUCTS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         // Create the string that contains the SQL statement to drop the products table
-        String SQL_DROP_
+        String SQL_DROP_PRODUCTS_TABLE = "DROP TABLE " + ProductsEntry.TABLE_NAME + ";";
+
+        // Log the SQL statement for debugging purposes
+        Log.i(LOG_TAG, "The following statement was executed upon DB version increase" +SQL_DROP_PRODUCTS_TABLE);
+
+        sqLiteDatabase.execSQL(SQL_DROP_PRODUCTS_TABLE);
     }
 }
