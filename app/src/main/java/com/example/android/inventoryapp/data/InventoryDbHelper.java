@@ -48,5 +48,8 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
         Log.i(LOG_TAG, "The following statement was executed upon DB version increase" +SQL_DROP_PRODUCTS_TABLE);
 
         sqLiteDatabase.execSQL(SQL_DROP_PRODUCTS_TABLE);
+
+        // Call the onCreate method again to create the database
+        onCreate(sqLiteDatabase);
     }
 }
