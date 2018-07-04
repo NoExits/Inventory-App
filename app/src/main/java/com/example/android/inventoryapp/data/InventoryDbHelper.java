@@ -9,14 +9,14 @@ import com.example.android.inventoryapp.data.InventoryContract.ProductsEntry;
 
 public class InventoryDbHelper extends SQLiteOpenHelper {
 
-    //Create the LOG_TAG for debugging purposes
+    // Create the LOG_TAG for debugging purposes
     private static final String LOG_TAG = InventoryDbHelper.class.getSimpleName();
 
-    //Constant int to hold the version number of the database.
-    public static final int DATABASE_VERSION = 1;
+    // Constant int to hold the version number of the database.
+    private static final int DATABASE_VERSION = 1;
 
-    //Constant String to hold the name of our database
-    public static final String DATABASE_NAME = "inventory.db";
+    // Constant String to hold the name of our database
+    private static final String DATABASE_NAME = "inventory.db";
 
     public InventoryDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -41,6 +41,8 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        // Create the string that contains the SQL statement to drop the products table
+        String SQL_DROP_
     }
 }
