@@ -21,6 +21,8 @@
             android:name=".data.InventoryProvider"
             android:authorities="com.example.android.inventoryapp"
             android:exported="false" />
+
+        <activity android:name=".EditorActivity"></activity>
     </application>
 
 </manifest>

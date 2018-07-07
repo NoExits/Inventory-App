@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Inventory App</string>
 
-    <!-- Catalog list item label for the button that indicates that a unit was sold [CHARLIMIT=8]-->
+    <!-- Catalog list item label for the button that indicates that a unit was sold [CHARLIMIT=8] -->
     <string name="list_item_button_label_sell">sell</string>
 
     <!-- Catalog list item hint that is placed before the quantity [CHARLIMIT=20] -->
@@ -10,4 +10,19 @@
     <!-- This text view will appear if there is nothing to display in the list activity -->
     <!-- [CHARLIMIT=NONE] [MULTIPLE LINEBREAKS REQUIRED]-->
     <string name="list_activity_hint_nothing_to_display">There is no inventory to display.\n\nStart adding items with the\nfloating action button!</string>
+
+    <!-- Menu item label to save a product in the editor [CHARLIMIT=22] -->
+    <string name="menu_item_label_save_product">Save product</string>
+
+    <!-- Menu item label to delete a single product in the editor [CHARLIMIT=22] -->
+    <string name="menu_item_label_delete_single_product">Delete</string>
+
+    <!-- Menu item label to delete all products from the database [CHARLIMIT=22] -->
+    <string name="menu_item_label_delete_all_products">Delete all products</string>
+
+    <!-- Menu item label to add a single dummy product to the database [CHARLIMIT=22] -->
+    <string name="menu_item_label_insert_single_product">Add single product</string>
+
+    <!-- Menu item label to add multiple dummy products to the database [CHARLIMIT=22] -->
+    <string name="menu_item_label_add_multiple_products">Add multiple products</string>
 </resources>
