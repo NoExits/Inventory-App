@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Inventory App</string>
+
+    <!-- Catalog list item label for the button that indicates that a unit was sold [CHARLIMIT=8]-->
+    <string name="list_item_button_label_sell">sell</string>
+
+    <!-- Catalog list item hint that is placed before the quantity [CHARLIMIT=20] -->
+    <string name="list_item_hint_units_left">Units left:</string>
 </resources>
