@@ -25,4 +25,11 @@
 
     <!-- Menu item label to add multiple dummy products to the database [CHARLIMIT=22] -->
     <string name="menu_item_label_add_multiple_products">Add multiple products</string>
+
+    <!-- Editor activity labels for the EditText fields [CHARLIMIT=30]-->
+    <string name="editor_label_supplier_phone">Supplier phone:</string>
+    <string name="editor_label_supplier_name">Supplier name:</string>
+    <string name="editor_label_product_quantity">Available quantity:</string>
+    <string name="android_label_product_price">Product pricing:</string>
+    <string name="editor_label_product_name">Product name:</string>
 </resources>
