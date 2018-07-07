@@ -22,6 +22,7 @@
             android:authorities="com.example.android.inventoryapp"
             android:exported="false" />
 
+        <activity android:name=".ListActivity"></activity>
     </application>
 
 </manifest>

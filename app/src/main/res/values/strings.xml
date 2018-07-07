@@ -6,4 +6,8 @@
 
     <!-- Catalog list item hint that is placed before the quantity [CHARLIMIT=20] -->
     <string name="list_item_hint_units_left">Units left:</string>
+
+    <!-- This text view will appear if there is nothing to display in the list activity -->
+    <!-- [CHARLIMIT=NONE] [MULTIPLE LINEBREAKS REQUIRED]-->
+    <string name="list_activity_hint_nothing_to_display">There is no inventory to display.\n\nStart adding items with the\nfloating action button!</string>
 </resources>
