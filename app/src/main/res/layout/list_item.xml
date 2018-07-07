@@ -19,7 +19,7 @@
         tools:text="Copypaper, A4, 4g" />
 
     <TextView
-        android:id="@+id/list_item_product_brand"
+        android:id="@+id/list_item_product_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -28,7 +28,7 @@
         android:textColor="#AEB6BD"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_item_product_name"
-        tools:text="Victoria brand" />
+        tools:text="Unit price: 241" />
 
     <TextView
         android:id="@+id/list_item_product_quantity"
@@ -39,7 +39,7 @@
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="#AEB6BD"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_item_product_brand"
+        app:layout_constraintTop_toBottomOf="@+id/list_item_product_price"
         tools:text="Units left: 456" />
 
     <Button
