@@ -137,10 +137,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         (InventoryContract.ProductsEntry.CONTENT_URI, values);
 
                 if (returnedUri == null) {
-                    Toast.makeText(this, R.string.editor_hint_db_insertion_unsuccessful,
+                    Toast.makeText(this, R.string.activity_hint_db_insertion_unsuccessful,
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, R.string.editor_hint_db_insertion_successful,
+                    Toast.makeText(this, R.string.activity_hint_db_insertion_successful,
                             Toast.LENGTH_SHORT).show();
                 }
                 break;

@@ -2,6 +2,7 @@ package com.example.android.inventoryapp;
 
 import android.app.LoaderManager;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -15,10 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.InventoryContract;
 
-public class ListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class ListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     // Log tag for debugging purposes
     private static final String LOG_TAG = ListActivity.class.getSimpleName();
@@ -66,7 +68,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         });
 
         // Initialize the Loader
-        getLoaderManager().initLoader(LOADER_ID, null,this);
+        getLoaderManager().initLoader(LOADER_ID, null, this);
     }
 
     // Override the framework method that creates the action bar menus
@@ -82,14 +84,14 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle the user click in the overflow menu
         // TODO: Finish the overflow menu items
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.list_activity_delete_all_products:
                 // Do stuff...
                 return true;
             case R.id.list_activity_insert_single_product:
-                // Do stuff...
+                insertTestProduct();
                 return true;
-            case  R.id.list_activity_insert_multiple_products:
+            case R.id.list_activity_insert_multiple_products:
                 // Do stuff...
                 return true;
         }
@@ -129,7 +131,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     // Helper method to set up the Floating Action Button in this activity
-    private void setupFab(){
+    private void setupFab() {
         FloatingActionButton fab = findViewById(R.id.floating_action_button);
 
         // Set an onClickListener on the FAB which starts the Editor in insert mode with the
@@ -143,5 +145,24 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
                 startActivity(newProductIntent);
             }
         });
+    }
+
+    // Helper method to insert a single dummy product into the database
+    private void insertTestProduct() {
+        ContentValues values = new ContentValues();
+
+        values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_NAME, "Copypaper, A4, 40G");
+        values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_PRICE, 352);
+        values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_QUANTITY, 12);
+        values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_SUPPLIER_NAME, "Jane Doe");
+        values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_SUPPLIER_PHONE, "+36 70 123 4567");
+
+        Uri returnedUri = getContentResolver().insert(InventoryContract.ProductsEntry.CONTENT_URI, values);
+
+        if (returnedUri == null) {
+            Toast.makeText(this, R.string.activity_hint_db_insertion_unsuccessful, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.activity_hint_db_insertion_successful, Toast.LENGTH_SHORT).show();
+        }
     }
 }
