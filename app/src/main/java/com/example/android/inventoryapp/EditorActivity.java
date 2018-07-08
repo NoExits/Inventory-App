@@ -65,25 +65,33 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         Button incButton = findViewById(R.id.editor_button_increase);
         Button decButton = findViewById(R.id.editor_button_decrease);
 
+        // set an onClickListener on the Increase button and only increase the value
+        // if there is something already in the EditText
         incButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String quantityString = mProductQuantity.getText().toString().trim();
-                int quantity = Integer.valueOf(quantityString);
-                quantity++;
-                mProductQuantity.setText(String.valueOf(quantity));
+                if (!TextUtils.isEmpty(mProductQuantity.getText()) && mProductQuantity != null) {
+                    String quantityString = mProductQuantity.getText().toString().trim();
+                    int quantity = Integer.valueOf(quantityString);
+                    quantity++;
+                    mProductQuantity.setText(String.valueOf(quantity));
+                }
             }
         });
 
+        // set an onClickListener on the Decrease button and only decrease the value
+        // if there is something already in the EditText and it is > 0
         decButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String quantityString = mProductQuantity.getText().toString().trim();
-                int quantity = Integer.valueOf(quantityString);
-                if (quantity > 0) {
-                    quantity--;
+                if (!TextUtils.isEmpty(mProductQuantity.getText()) && mProductQuantity != null) {
+                    String quantityString = mProductQuantity.getText().toString().trim();
+                    int quantity = Integer.valueOf(quantityString);
+                    if (quantity > 0) {
+                        quantity--;
+                    }
+                    mProductQuantity.setText(String.valueOf(quantity));
                 }
-                mProductQuantity.setText(String.valueOf(quantity));
             }
         });
     }
@@ -197,7 +205,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
 
         // At this point, if the data input is not valid, exit the method early.
-        if (!isValidated){
+        if (!isValidated) {
             return;
         }
 
