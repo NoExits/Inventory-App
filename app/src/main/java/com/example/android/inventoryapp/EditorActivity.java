@@ -64,8 +64,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             case ACTIVITY_MODE_INSERT:
                 setTitle(starterIntent.getIntExtra
                         ("activityTitle", R.string.activity_title_insert));
+                invalidateOptionsMenu();
                 break;
-            // TODO: Remove the 'delete' option from the menus since it doesn't make sense
 
             case ACTIVITY_MODE_EDIT:
                 setTitle(starterIntent.getIntExtra
@@ -93,6 +93,16 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 // Do stuff
             case R.id.editor_action_delete_single_product:
                 // Do stuff
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        if (activityMode == ACTIVITY_MODE_INSERT) {
+            MenuItem item = menu.findItem(R.id.editor_action_delete_single_product);
+            item.setVisible(false);
         }
         return true;
     }
