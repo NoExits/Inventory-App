@@ -47,4 +47,8 @@
     <!-- Editor activity hints for (un)successful update of a product [CHARLIMIT=35] -->
     <string name="editor_hint_db_update_successful">Successfully edited the product</string>
     <string name="editor_hint_db_update_unsuccessful">Could not edit the product</string>
+
+    <!-- Editor activity hints for (un)successful deletion of a product [CHARLIMIT=35] -->
+    <string name="editor_hint_db_delete_successful">Successfully deleted the product</string>
+    <string name="editor_hint_db_delete_unsuccessful">Could not delete the product</string>
 </resources>

@@ -89,14 +89,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // // Handle the user click in the overflow menu
-        // TODO: Finish the overflow menu items
+        // Handle the user click in the overflow menu
         switch (item.getItemId()) {
             case R.id.editor_action_save:
                 saveProduct();
                 finish();
             case R.id.editor_action_delete_single_product:
-                // Do stuff
+                deleteProduct();
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(EditorActivity.this);
         }
@@ -151,13 +150,26 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         (mExistingProductUri, values, null, null);
 
                 if (rowsAffected == 0) {
-                    Toast.makeText(this, R.string.editor_hint_db_update_successful,
+                    Toast.makeText(this, R.string.editor_hint_db_update_unsuccessful,
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, R.string.editor_hint_db_update_unsuccessful,
+                    Toast.makeText(this, R.string.editor_hint_db_update_successful,
                             Toast.LENGTH_SHORT).show();
                 }
                 break;
+        }
+    }
+
+    private void deleteProduct() {
+        // Delete the current product in the editor. This is only available in edit mode of the activity.
+        int affectedRows = getContentResolver().delete(mExistingProductUri, null, null);
+
+        if (affectedRows == 0) {
+            Toast.makeText(this, R.string.editor_hint_db_delete_unsuccessful,
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.editor_hint_db_delete_successful,
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
