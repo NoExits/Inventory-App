@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -89,18 +90,44 @@
             app:layout_constraintTop_toBottomOf="@+id/editor_label_product_quantity"
             tools:text="23" />
 
+        <Button
+            android:id="@+id/editor_button_decrease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/editor_label_decrease"
+            android:textAppearance="?android:textAppearanceSmall"
+            app:layout_constraintEnd_toStartOf="@+id/editor_button_increase"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editor_field_product_quantity" />
+
+        <Button
+            android:id="@+id/editor_button_increase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/editor_label_increase"
+            android:textAppearance="?android:textAppearanceSmall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/editor_button_decrease"
+            app:layout_constraintTop_toBottomOf="@+id/editor_field_product_quantity" />
+
         <TextView
             android:id="@+id/editor_label_supplier_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
             android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginTop="12dp"
             android:fontFamily="sans-serif"
             android:text="@string/editor_label_supplier_name"
             android:textAppearance="?android:textAppearanceSmall"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editor_field_product_quantity" />
+            app:layout_constraintTop_toBottomOf="@+id/editor_button_decrease" />
 
         <EditText
             android:id="@+id/editor_field_supplier_name"

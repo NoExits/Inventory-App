@@ -39,6 +39,10 @@
     <string name="editor_label_product_price">Product pricing:</string>
     <string name="editor_label_product_name">Product name:</string>
 
+    <!-- Editor activity labels for the increase and decrease quantity buttons [CHARLIMIT=10]-->
+    <string name="editor_label_increase">Increase</string>
+    <string name="editor_label_decrease">Decrease</string>
+
     <!-- Activity titles for the Editor in Insert/Edit modes [CHARLIMIT=15] -->
     <string name="activity_title_insert">Add a product</string>
     <string name="activity_title_edit">Edit a product</string>

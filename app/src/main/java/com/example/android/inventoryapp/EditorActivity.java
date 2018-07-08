@@ -15,6 +15,8 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -58,6 +60,31 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // Handle the intent that started this activity and set the URI (if it exists)
         // and the title accordingly. Additionally, initialize the CursorLoader
         handleStarterIntent(getIntent());
+
+        Button incButton = findViewById(R.id.editor_button_increase);
+        Button decButton = findViewById(R.id.editor_button_decrease);
+
+        incButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String quantityString = mProductQuantity.getText().toString().trim();
+                int quantity = Integer.valueOf(quantityString);
+                quantity++;
+                mProductQuantity.setText(String.valueOf(quantity));
+            }
+        });
+
+        decButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String quantityString = mProductQuantity.getText().toString().trim();
+                int quantity = Integer.valueOf(quantityString);
+                if (quantity > 0){
+                    quantity--;
+                }
+                mProductQuantity.setText(String.valueOf(quantity));
+            }
+        });
     }
 
     // Helper method to handle the intent that started this activity and set it to either
