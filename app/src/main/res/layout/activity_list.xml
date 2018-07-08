@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListActivity">
+    tools:context=".ListActivity"
+    android:descendantFocusability="blocksDescendants">
 
     <!-- Empty text view to show if there are no displayable records in the database -->
     <TextView
