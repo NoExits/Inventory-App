@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -79,7 +80,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             public void onClick(View view) {
                 String quantityString = mProductQuantity.getText().toString().trim();
                 int quantity = Integer.valueOf(quantityString);
-                if (quantity > 0){
+                if (quantity > 0) {
                     quantity--;
                 }
                 mProductQuantity.setText(String.valueOf(quantity));
@@ -121,7 +122,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         switch (item.getItemId()) {
             case R.id.editor_action_save:
                 saveProduct();
-                finish();
                 return true;
             case R.id.editor_action_delete_single_product:
                 showDeleteConfirmationDialog();
@@ -150,23 +150,70 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     }
 
     private void saveProduct() {
-        // Get the data (all in strings for now) in the editor fields
-        String productName = mProductName.getText().toString().trim();
-        String productPrice = mProductPrice.getText().toString().trim();
-        String productQuantity = mProductQuantity.getText().toString().trim();
-        String supplierName = mSupplierName.getText().toString().trim();
-        String supplierPhone = mSupplierPhone.getText().toString().trim();
+        // Variables to hold the values in the EditText fields
+        String productName = null;
+        String productPrice;
+        String productQuantity;
+        String supplierName = null;
+        String supplierPhone = null;
+        Long productPriceLong = null;
+        int productQuantityInt;
 
-        long productPriceLong = Long.valueOf(productPrice);
-        int productQuantityInt = Integer.valueOf(productQuantity);
+        // By default, we assume that everything is filled in correctly. During the validity checks
+        // we'll set this variable to false if something is incorrect. We'll only attempt to invoke
+        // the insert/update methods if this variable is still true
+        boolean isValidated = true;
+
+        // Get the data WITH VALIDATION (where applicable) in the editor fields
+        // The quantity field can be 0 so we'll get that field when we have the ContentValues
+        // object so we can insert it in one logic
+        if (TextUtils.isEmpty(mProductName.getText())) {
+            mProductName.setError(getString(R.string.validation_hint_name));
+            isValidated = false;
+        } else {
+            productName = mProductName.getText().toString().trim();
+        }
+
+        if (TextUtils.isEmpty(mProductPrice.getText())) {
+            mProductPrice.setError(getString(R.string.validation_hint_price));
+            isValidated = false;
+        } else {
+            productPrice = mProductPrice.getText().toString().trim();
+            productPriceLong = Long.valueOf(productPrice);
+        }
+
+        if (TextUtils.isEmpty(mSupplierName.getText())) {
+            mSupplierName.setError(getString(R.string.validation_hint_supplier_name));
+            isValidated = false;
+        } else {
+            supplierName = mSupplierName.getText().toString().trim();
+        }
+
+        if (TextUtils.isEmpty(mSupplierPhone.getText())) {
+            mSupplierPhone.setError(getString(R.string.validation_hint_supplier_phone));
+            isValidated = false;
+        } else {
+            supplierPhone = mSupplierPhone.getText().toString().trim();
+        }
+
+        // At this point, if the data input is not valid, exit the method early.
+        if (!isValidated){
+            return;
+        }
 
         // Put these values into a ContentValues object
         ContentValues values = new ContentValues();
         values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_NAME, productName);
         values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_PRICE, productPriceLong);
-        values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_QUANTITY, productQuantityInt);
         values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_SUPPLIER_NAME, supplierName);
         values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_SUPPLIER_PHONE, supplierPhone);
+
+        // This is where we get the quantity data
+        if (!TextUtils.isEmpty(mProductQuantity.getText())) {
+            productQuantity = mProductQuantity.getText().toString().trim();
+            productQuantityInt = Integer.valueOf(productQuantity);
+            values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_QUANTITY, productQuantityInt);
+        }
 
         // Depending on the current mode of the activity, either insert or update a product
         switch (activityMode) {
@@ -195,6 +242,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 }
                 break;
         }
+
+        // Exit the activity
+        finish();
     }
 
     private void deleteProduct() {
@@ -239,10 +289,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     }
 
     // Create an intent to dial the supplier's phone number if there is a suitable app for that
-    private void callSupplier(){
+    private void callSupplier() {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + mSupplierPhone.getText()));
-        if (intent.resolveActivity(getPackageManager()) != null){
+        if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
     }

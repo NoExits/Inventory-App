@@ -67,4 +67,17 @@
 
     <!-- AlertDialog button label to cancel the delete process of a single product [CHARLIMIT=10] -->
     <string name="label_alert_dialog_cancel_product_deletion">Cancel</string>
+
+    <!-- Content provider error message strings [CHARLIMIT=50] -->
+    <string name="content_provider_hint_uri_match_error">URI could not be queried</string>
+    <string name="content_provider_hint_mime_match_error">URI could not be matched with MIME type</string>
+    <string name="content_provider_hint_deletion_error">Deletion is not supported for given URI</string>
+    <string name="content_provider_hint_insert_error">Insertion is not supported with the provided URI</string>
+    <string name="content_provider_hint_update_error">Update is not supported to for the provided URI</string>
+
+    <!-- Validation hints in the editor if the input data is incorrect [CHARLIMIT=32] -->
+    <string name="validation_hint_name">Name must not be empty</string>
+    <string name="validation_hint_price">Price must not be empty</string>
+    <string name="validation_hint_supplier_name">Supplier name must not be empty</string>
+    <string name="validation_hint_supplier_phone">Supplier phone must not be empty</string>
 </resources>

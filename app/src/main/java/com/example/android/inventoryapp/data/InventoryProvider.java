@@ -10,7 +10,9 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.android.inventoryapp.R;
 import com.example.android.inventoryapp.data.InventoryContract.ProductsEntry;
 
 public class InventoryProvider extends ContentProvider {
@@ -76,8 +78,8 @@ public class InventoryProvider extends ContentProvider {
                         selection, selectionArgs, null, null, sortOrder);
                 break;
             default:
-                // TODO: Create new logic to not crash the user's device but rather prompt a message about the issue
-                throw new IllegalArgumentException("URI cannot be queried: " + uri);
+                Toast.makeText(getContext(), R.string.content_provider_hint_uri_match_error, Toast.LENGTH_SHORT).show();
+                return null;
         }
 
         // Set the notification URI on the cursor
@@ -98,8 +100,8 @@ public class InventoryProvider extends ContentProvider {
             case PRODUCT_TYPE_LIST:
                 return ProductsEntry.CONTENT_LIST_TYPE;
             default:
-                // TODO: Create new logic to not crash the user's device but rather prompt a message about the issue
-                throw new IllegalArgumentException("Could not match URI with MIME type");
+                Toast.makeText(getContext(), R.string.content_provider_hint_mime_match_error, Toast.LENGTH_SHORT).show();
+                return null;
         }
     }
 
@@ -112,8 +114,6 @@ public class InventoryProvider extends ContentProvider {
         // Variable to hold the returned row's ID
         long rowId;
 
-        // TODO: Do validity checks on the ContentValues
-
         // Match the given URI with the UriMatcher
         int match = sUriMatcher.match(uri);
         switch (match) {
@@ -121,8 +121,8 @@ public class InventoryProvider extends ContentProvider {
                 rowId = db.insert(ProductsEntry.TABLE_NAME, null, contentValues);
                 break;
             default:
-                // TODO: Create new logic to not crash the user's device but rather prompt a message about the issue
-                throw new IllegalArgumentException("Insertion is not supported with: " + uri);
+                Toast.makeText(getContext(), R.string.content_provider_hint_insert_error, Toast.LENGTH_SHORT).show();
+                return null;
         }
         // Check whether the insertion was successful or not. Return early (and null) if not.
         if (rowId == -1) {
@@ -165,13 +165,9 @@ public class InventoryProvider extends ContentProvider {
                 }
                 break;
             default:
-                // TODO: Create new logic to not crash the user's device but rather prompt a message about the issue
-                throw new IllegalArgumentException("Deletion is not supported for " + uri);
-        }
-
-        if (affectedRows == 0) {
-            // TODO: Think about this logic and a possible improvement
-            Log.i(LOG_TAG, "There was a problem with the deletion");
+                Toast.makeText(getContext(), R.string.content_provider_hint_deletion_error, Toast.LENGTH_SHORT).show();
+                // Return 0 which is the same as no rows affected
+                affectedRows = 0;
         }
 
         return affectedRows;
@@ -182,8 +178,6 @@ public class InventoryProvider extends ContentProvider {
                       @Nullable String selection, @Nullable String[] selectionArgs) {
         // Get a writable database
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-        // TODO: Add data validation before updating a product/a list of products.
 
         // Match the given URI with the UriMatcher and notify all observers about the change
         int match = sUriMatcher.match(uri);
@@ -203,8 +197,8 @@ public class InventoryProvider extends ContentProvider {
                     getContext().getContentResolver().notifyChange(uri, null);
                 }
             default:
-                // TODO: Create new logic to not crash the user's device but rather prompt a message about the issue
-                throw new IllegalArgumentException("Update is not supported for " + uri);
+                Toast.makeText(getContext(), R.string.content_provider_hint_update_error, Toast.LENGTH_SHORT).show();
+                return 0;
         }
     }
 }
