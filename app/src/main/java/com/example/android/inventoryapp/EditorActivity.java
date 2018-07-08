@@ -61,7 +61,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     // Helper method to handle the intent that started this activity and set it to either
     // edit or insert modes.
     private void handleStarterIntent(Intent starterIntent) {
-        activityMode = starterIntent.getIntExtra("activityMode", 0);
+        activityMode = starterIntent.getIntExtra("activityMode", ACTIVITY_MODE_INSERT);
 
         switch (activityMode) {
             case ACTIVITY_MODE_INSERT:
@@ -69,7 +69,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         ("activityTitle", R.string.activity_title_insert));
                 invalidateOptionsMenu();
                 break;
-
             case ACTIVITY_MODE_EDIT:
                 setTitle(starterIntent.getIntExtra
                         ("activityTitle", R.string.activity_title_edit));
