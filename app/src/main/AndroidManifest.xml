@@ -22,7 +22,13 @@
             android:authorities="com.example.android.inventoryapp"
             android:exported="false" />
 
-        <activity android:name=".EditorActivity"></activity>
+        <activity
+            android:name=".EditorActivity"
+            android:parentActivityName=".ListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -93,8 +94,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         switch (item.getItemId()) {
             case R.id.editor_action_save:
                 saveProduct();
+                finish();
             case R.id.editor_action_delete_single_product:
                 // Do stuff
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(EditorActivity.this);
         }
         return true;
     }
