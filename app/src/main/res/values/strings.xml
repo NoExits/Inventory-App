@@ -29,6 +29,9 @@
     <!-- Menu item label to add multiple dummy products to the database [CHARLIMIT=22] -->
     <string name="menu_item_label_add_multiple_products">Add multiple products</string>
 
+    <!-- Menu item label to contact the supplier via a phone call [CHARLIMIT=22]-->
+    <string name="menu_item_label_call_supplier">Call supplier</string>
+
     <!-- Editor activity labels for the EditText fields [CHARLIMIT=30]-->
     <string name="editor_label_supplier_phone">Supplier phone:</string>
     <string name="editor_label_supplier_name">Supplier name:</string>

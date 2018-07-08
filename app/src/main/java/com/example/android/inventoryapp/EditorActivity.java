@@ -99,6 +99,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             case R.id.editor_action_delete_single_product:
                 showDeleteConfirmationDialog();
                 return true;
+            case R.id.editor_action_call_supplier:
+                callSupplier();
+                return true;
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(EditorActivity.this);
                 return true;
@@ -110,7 +113,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         if (activityMode == ACTIVITY_MODE_INSERT) {
+            // Hide the 'Delete product' and 'Call supplier' actions in insert mode
             MenuItem item = menu.findItem(R.id.editor_action_delete_single_product);
+            item.setVisible(false);
+            item = menu.findItem(R.id.editor_action_call_supplier);
             item.setVisible(false);
         }
         return true;
@@ -203,6 +209,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // Create and show AlertDialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    // Create an intent to dial the supplier's phone number if there is a suitable app for that
+    private void callSupplier(){
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + mSupplierPhone.getText()));
+        if (intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }
     }
 
     @Override

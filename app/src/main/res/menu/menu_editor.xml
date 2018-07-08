@@ -14,4 +14,9 @@
         android:title="@string/menu_item_label_delete_single_product"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/editor_action_call_supplier"
+        android:title="@string/menu_item_label_call_supplier"
+        app:showAsAction="never" />
+
 </menu>
