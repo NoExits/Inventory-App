@@ -173,7 +173,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         boolean isValidated = true;
 
         // Get the data WITH VALIDATION (where applicable) in the editor fields
-        // The quantity field can be 0 so we'll get that field when we have the ContentValues
+        // The quantity field CAN BE ZERO OR NULL (THE DATABASE WILL MAKE IT 0 IN THIS CASE)
+        // so we'll get that field when we have the ContentValues
         // object so we can insert it in one logic
         if (TextUtils.isEmpty(mProductName.getText())) {
             mProductName.setError(getString(R.string.validation_hint_name));
@@ -206,6 +207,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         // At this point, if the data input is not valid, exit the method early.
         if (!isValidated) {
+            Toast.makeText(this, R.string.validation_hint_unsuccessful, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -220,6 +222,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         if (!TextUtils.isEmpty(mProductQuantity.getText())) {
             productQuantity = mProductQuantity.getText().toString().trim();
             productQuantityInt = Integer.valueOf(productQuantity);
+            values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_QUANTITY, productQuantityInt);
+        } else {
+            productQuantityInt = 0;
             values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_QUANTITY, productQuantityInt);
         }
 

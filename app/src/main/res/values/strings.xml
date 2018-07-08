@@ -80,6 +80,7 @@
     <string name="validation_hint_price">Price must not be empty</string>
     <string name="validation_hint_supplier_name">Supplier name must not be empty</string>
     <string name="validation_hint_supplier_phone">Supplier phone must not be empty</string>
+    <string name="validation_hint_unsuccessful">Data validation unsuccessful</string>
 
     <!-- List activity hint when deleting all products [CHARLIMIT=40] -->
     <string name="activity_list_hint_deleted_all_products">Deleted all products</string>
