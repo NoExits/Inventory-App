@@ -36,6 +36,10 @@ public class ProductCursorAdapter extends CursorAdapter {
         String productQuantity = cursor.getString
                 (cursor.getColumnIndex(InventoryContract.ProductsEntry.COLUMN_PRODUCT_QUANTITY));
 
+        // Add the extra strings to the price and quantity variables
+        productPrice = context.getString(R.string.list_item_hint_unit_price) + " " + productPrice;
+        productQuantity = context.getString(R.string.list_item_hint_units_left) + " " + productQuantity;
+
         // Populate the views with the data
         productNameView.setText(productName);
         productPriceView.setText(productPrice);
