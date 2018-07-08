@@ -83,16 +83,17 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle the user click in the overflow menu
-        // TODO: Finish the overflow menu items
         switch (item.getItemId()) {
             case R.id.list_activity_delete_all_products:
-                // Do stuff...
+                deleteAllProducts();
                 return true;
             case R.id.list_activity_insert_single_product:
                 insertTestProduct();
                 return true;
             case R.id.list_activity_insert_multiple_products:
-                // Do stuff...
+                for (int i = 0; i < 5; i++){
+                    insertTestProduct();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -164,5 +165,11 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             Toast.makeText(this, R.string.activity_hint_db_insertion_successful, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // Helper method to delete all products in the database
+    private void deleteAllProducts(){
+        getContentResolver().delete(InventoryContract.ProductsEntry.CONTENT_URI, null, null);
+        Toast.makeText(this, R.string.activity_list_hint_deleted_all_products, Toast.LENGTH_SHORT).show();
     }
 }
