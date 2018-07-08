@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.TextView;
+
+import com.example.android.inventoryapp.data.InventoryContract;
 
 public class ProductCursorAdapter extends CursorAdapter {
 
@@ -20,6 +23,22 @@ public class ProductCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        // TODO: Complete this method once we have the editor and its fields finalized
+        // Find reference to the views we are aiming to populate
+        TextView productNameView = view.findViewById(R.id.list_item_product_name);
+        TextView productPriceView = view.findViewById(R.id.list_item_product_price);
+        TextView productQuantityView = view.findViewById(R.id.list_item_product_quantity);
+
+        // Get the data from the cursor
+        String productName = cursor.getString
+                (cursor.getColumnIndex(InventoryContract.ProductsEntry.COLUMN_PRODUCT_NAME));
+        String productPrice = cursor.getString
+                (cursor.getColumnIndex(InventoryContract.ProductsEntry.COLUMN_PRODUCT_PRICE));
+        String productQuantity = cursor.getString
+                (cursor.getColumnIndex(InventoryContract.ProductsEntry.COLUMN_PRODUCT_QUANTITY));
+
+        // Populate the views with the data
+        productNameView.setText(productName);
+        productPriceView.setText(productPrice);
+        productQuantityView.setText(productQuantity);
     }
 }
