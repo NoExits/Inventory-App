@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <!-- TODO: Add source image for the FAB -->
+    <!-- TODO: Add source image for the FAB. Figure out how to create those 'negative' PNG images for this -->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floating_action_button"
         android:layout_width="wrap_content"
