@@ -51,4 +51,13 @@
     <!-- Editor activity hints for (un)successful deletion of a product [CHARLIMIT=35] -->
     <string name="editor_hint_db_delete_successful">Successfully deleted the product</string>
     <string name="editor_hint_db_delete_unsuccessful">Could not delete the product</string>
+
+    <!-- AlertDialog label when the user tries to delete a single product [CHARLIMIT=NONE]  -->
+    <string name="label_alert_dialog_delete_single_product">Delete this product?</string>
+
+    <!-- AlertDialog button label to delete a single product [CHARLIMIT=10] -->
+    <string name="label_alert_dialog_confirm_product_deletion">Delete</string>
+
+    <!-- AlertDialog button label to cancel the delete process of a single product [CHARLIMIT=10] -->
+    <string name="label_alert_dialog_cancel_product_deletion">Cancel</string>
 </resources>

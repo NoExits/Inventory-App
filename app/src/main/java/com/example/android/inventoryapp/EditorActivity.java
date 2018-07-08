@@ -1,9 +1,11 @@
 package com.example.android.inventoryapp;
 
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -93,12 +95,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             case R.id.editor_action_save:
                 saveProduct();
                 finish();
+                return true;
             case R.id.editor_action_delete_single_product:
-                deleteProduct();
+                showDeleteConfirmationDialog();
+                return true;
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(EditorActivity.this);
+                return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -170,6 +175,34 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             Toast.makeText(this, R.string.editor_hint_db_delete_successful,
                     Toast.LENGTH_SHORT).show();
         }
+
+        // Exit the activity
+        finish();
+    }
+
+    private void showDeleteConfirmationDialog() {
+        // Create an AlertDialog.builder and set the message and click listeners
+        // for the positive and negative buttons
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.label_alert_dialog_delete_single_product);
+        builder.setPositiveButton(R.string.label_alert_dialog_confirm_product_deletion, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                deleteProduct();
+            }
+        });
+        builder.setNegativeButton(R.string.label_alert_dialog_cancel_product_deletion, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (dialogInterface != null) {
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+
+        // Create and show AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
