@@ -37,4 +37,11 @@
     <string name="activity_title_insert">Add a product</string>
     <string name="activity_title_edit">Edit a product</string>
 
+    <!-- Editor activity hints for (un)successful insertion of a new product [CHARLIMIT=35] -->
+    <string name="editor_hint_db_insertion_unsuccessful">Product insertion unsuccessful</string>
+    <string name="editor_hint_db_insertion_successful">Product insertion successful</string>
+
+    <!-- Editor activity hints for (un)successful update of a product [CHARLIMIT=35] -->
+    <string name="editor_hint_db_update_successful">Successfully edited the product</string>
+    <string name="editor_hint_db_update_unsuccessful">Could not edit the product</string>
 </resources>

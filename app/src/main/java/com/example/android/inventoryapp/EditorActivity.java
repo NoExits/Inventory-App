@@ -2,6 +2,7 @@ package com.example.android.inventoryapp;
 
 import android.app.LoaderManager;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.InventoryContract;
 
@@ -57,7 +59,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     // Helper method to handle the intent that started this activity and set it to either
     // edit or insert modes.
-    public void handleStarterIntent(Intent starterIntent) {
+    private void handleStarterIntent(Intent starterIntent) {
         activityMode = starterIntent.getIntExtra("activityMode", 0);
 
         switch (activityMode) {
@@ -90,7 +92,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // TODO: Finish the overflow menu items
         switch (item.getItemId()) {
             case R.id.editor_action_save:
-                // Do stuff
+                saveProduct();
             case R.id.editor_action_delete_single_product:
                 // Do stuff
         }
@@ -105,6 +107,54 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             item.setVisible(false);
         }
         return true;
+    }
+
+    private void saveProduct() {
+        // Get the data (all in strings for now) in the editor fields
+        String productName = mProductName.getText().toString().trim();
+        String productPrice = mProductPrice.getText().toString().trim();
+        String productQuantity = mProductQuantity.getText().toString().trim();
+        String supplierName = mSupplierName.getText().toString().trim();
+        String supplierPhone = mSupplierPhone.getText().toString().trim();
+
+        long productPriceLong = Long.valueOf(productPrice);
+        int productQuantityInt = Integer.valueOf(productQuantity);
+
+        // Put these values into a ContentValues object
+        ContentValues values = new ContentValues();
+        values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_NAME, productName);
+        values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_PRICE, productPriceLong);
+        values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_QUANTITY, productQuantityInt);
+        values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_SUPPLIER_NAME, supplierName);
+        values.put(InventoryContract.ProductsEntry.COLUMN_PRODUCT_SUPPLIER_PHONE, supplierPhone);
+
+        // Depending on the current mode of the activity, either insert or update a product
+        switch (activityMode) {
+            case ACTIVITY_MODE_INSERT:
+                Uri returnedUri = getContentResolver().insert
+                        (InventoryContract.ProductsEntry.CONTENT_URI, values);
+
+                if (returnedUri == null) {
+                    Toast.makeText(this, R.string.editor_hint_db_insertion_unsuccessful,
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, R.string.editor_hint_db_insertion_successful,
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case ACTIVITY_MODE_EDIT:
+                int rowsAffected = getContentResolver().update
+                        (mExistingProductUri, values, null, null);
+
+                if (rowsAffected == 0) {
+                    Toast.makeText(this, R.string.editor_hint_db_update_successful,
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, R.string.editor_hint_db_update_unsuccessful,
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
     }
 
     @Override
